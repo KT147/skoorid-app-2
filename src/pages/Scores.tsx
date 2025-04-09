@@ -15,6 +15,7 @@ interface Game {
 }
 
 const Scores: React.FC = () => {
+  
 
   useEffect(() => {
     fetch("https://skoorid-database-default-rtdb.europe-west1.firebasedatabase.app/skoorid.json")

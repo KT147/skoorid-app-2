@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { usePlayers } from "../store/PlayerContext";
-import { IonButton, IonContent, IonPage, IonIcon, IonHeader, IonToolbar, IonTitle, IonCard } from '@ionic/react';
+import { IonButton, IonContent, IonPage, IonIcon, IonHeader, IonToolbar, IonTitle, IonCard, IonAlert } from '@ionic/react';
 import {  backspace } from 'ionicons/icons';
 import { useHistory } from "react-router";
 
@@ -239,7 +239,9 @@ function Snooker() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(gameData),
-    }).then((res) => res.json());
+    }).then((res) => res.json()).then(() => {
+      window.location.reload()
+    })
   };
 
   return (
@@ -320,9 +322,37 @@ function Snooker() {
           {totalPoints! < Math.abs(starterPoints - opponentPoints) && <IonButton onClick={newFrame}>Lõpeta freim</IonButton>}
 
           <br /><br />
-          <IonButton expand="full" onClick={navigateToScore}>
-            Lõpeta mäng ja salvesta tulemused
+          <IonButton id="present-alert" shape="round" color="primary">
+            Lõpeta mäng
           </IonButton>
+          <IonAlert
+        header="Kas salvestada tulemused?"
+        trigger="present-alert"
+        buttons={[
+          {
+            text: 'TAGASI',
+            role: 'cancel',
+            handler: () => {
+              console.log('Alert canceled');
+            },
+          },
+          {
+            text: 'EI',
+            role: 'confirm',
+            handler: () => {
+            uHistory.push("/home-page");
+            window.location.reload()
+            },
+          },
+          {
+            text: 'JAH',
+            role: 'confirm',
+            handler: () => {
+              navigateToScore();
+            },
+          },
+        ]}
+      ></IonAlert>
       </IonContent>
     </IonPage>
   );

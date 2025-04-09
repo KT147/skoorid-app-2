@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { usePlayers } from "../store/PlayerContext"
-import { IonButton, IonContent, IonPage, IonCard, IonCardContent, IonText, IonIcon, IonHeader, IonToolbar, IonTitle } from "@ionic/react"
+import { IonButton, IonContent, IonPage, IonCard, IonCardContent, IonText, IonIcon, IonHeader, IonToolbar, IonTitle, IonAlert } from "@ionic/react"
 import { useHistory } from "react-router"
 import { backspace } from "ionicons/icons"
 
@@ -216,7 +216,9 @@ function FourteenOne() {
       },
       body: JSON.stringify(gameData)
     })
-      .then(res => res.json())
+      .then(res => res.json()).then(() => {
+        window.location.reload()
+      })
   }
 
   return (
@@ -277,7 +279,37 @@ function FourteenOne() {
           </IonCardContent>
           <br /><br /><br /><br />
         </IonCard>
-        <IonButton onClick={navigateToScore}>Lõpeta mäng ja salvesta tulemused</IonButton>
+        <IonButton id="present-alert" shape="round" color="primary">
+            Lõpeta mäng
+          </IonButton>
+          <IonAlert
+        header="Kas salvestada tulemused?"
+        trigger="present-alert"
+        buttons={[
+          {
+            text: 'TAGASI',
+            role: 'cancel',
+            handler: () => {
+              console.log('Alert canceled');
+            },
+          },
+          {
+            text: 'EI',
+            role: 'confirm',
+            handler: () => {
+            uHistory.push("/home-page");
+            window.location.reload()
+            },
+          },
+          {
+            text: 'JAH',
+            role: 'confirm',
+            handler: () => {
+              navigateToScore();
+            },
+          },
+        ]}
+      ></IonAlert>
       </IonContent>
     </IonPage>
   )

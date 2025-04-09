@@ -8,6 +8,7 @@ import {
     IonToolbar,
     IonTitle,
     IonCard,
+    IonAlert,
   } from "@ionic/react";
   import { useEffect, useState } from "react";
   import { usePlayers } from "../store/PlayerContext";
@@ -132,7 +133,9 @@ import {
           },
           body: JSON.stringify(gameData),
         }
-      ).then((res) => res.json());
+      ).then((res) => res.json()).then(() => {
+        window.location.reload()
+      })
     };
   
     return (
@@ -254,9 +257,37 @@ import {
           <br />
           <br />
   
-          <IonButton shape="round" onClick={navigateToScore} color="primary">
-            Lõpeta mäng ja salvesta tulemused
+          <IonButton id="present-alert" shape="round" color="primary">
+            Lõpeta mäng
           </IonButton>
+          <IonAlert
+        header="Kas salvestada tulemused?"
+        trigger="present-alert"
+        buttons={[
+          {
+            text: 'TAGASI',
+            role: 'cancel',
+            handler: () => {
+              console.log('Alert canceled');
+            },
+          },
+          {
+            text: 'EI',
+            role: 'confirm',
+            handler: () => {
+            history.push("/home-page");
+            window.location.reload()
+            },
+          },
+          {
+            text: 'JAH',
+            role: 'confirm',
+            handler: () => {
+              navigateToScore();
+            },
+          },
+        ]}
+      ></IonAlert>
         </IonContent>
       </IonPage>
     );
