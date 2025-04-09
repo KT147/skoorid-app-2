@@ -56,6 +56,8 @@ setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp className="blurred">
+    <div className="top-status-bar">
+  </div>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
