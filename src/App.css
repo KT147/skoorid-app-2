@@ -1,0 +1,89 @@
+
+:root {
+    --ion-font-family: "Arial", sans-serif;
+    --ion-background-color: rgb(158, 223, 73);
+}
+
+body, html, ion-app, ion-page, ion-content {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    text-align: center;    
+}
+
+.game-button:focus {
+    --background: yellow !important; 
+    --color: black !important;   
+  }
+
+ion-checkbox{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.center-input {
+    display: block;          
+    margin: 0 auto;           
+    width: 60%;               
+    margin-top: 100px; 
+    border: 1px solid white;      
+  }
+
+.game-input {
+  display: block;          
+    margin: 0 auto;           
+    width: 30%; 
+}
+
+/* .game-input:focus{
+  transform: translateY(-200px);  
+  transition: transform 0.3s ease-in-out;
+} */
+
+.ion-select-first{
+    display: block;          
+    margin: 0 auto;           
+    width: 60%;   
+    margin-top: 10px;    
+    margin-bottom: 60px;             
+    border-bottom: 1px solid white;   
+}
+
+.ion-select-second{
+    display: block;          
+    margin: 0 auto;           
+    width: 60%;   
+    margin-top: 10px;           
+    border-bottom: 1px solid white;   
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px; 
+  }
+  
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+.starting-table{
+    font-size: 50px;
+}
