@@ -250,7 +250,7 @@ function NineBall() {
             text: 'EI',
             role: 'confirm',
             handler: () => {
-            history.push("/home-page");
+            history.push("/");
             window.location.reload()
             },
           },

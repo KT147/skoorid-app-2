@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -59,28 +59,31 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route exact path="/add-player">
+          <Route path="/add-player">
             <AddPlayer />
           </Route>
-          <Route exact path="/home-page">
+          <Route path="/" exact>
+        <Redirect to="/home" />
+          </Route>
+          <Route path="/home" exact >
             <HomePage />
           </Route>
-          <Route exact path="/scores">
+          <Route path="/scores">
             <Scores />
           </Route>
-          <Route exact path="/fourteen-one">
+          <Route path="/fourteen-one">
             <FourteenOne />
           </Route>
-          <Route exact path="/eight-ball">
+          <Route path="/eight-ball">
             <EightBall />
           </Route>
-          <Route exact path="/nine-ball">
+          <Route path="/nine-ball">
             <NineBall />
           </Route>
-          <Route exact path="/ten-ball">
+          <Route path="/ten-ball">
             <TenBall />
           </Route>
-          <Route exact path="/snooker">
+          <Route path="/snooker">
             <Snooker />
           </Route>
         </IonRouterOutlet>
@@ -90,7 +93,7 @@ const App: React.FC = () => (
             <IonIcon aria-hidden="true" icon={add} />
             <IonLabel>Lisa mängija</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/home-page">
+          <IonTabButton tab="tab2" href="/home">
             <IonIcon aria-hidden="true" icon={home} />
             <IonLabel>Avaleht</IonLabel>
           </IonTabButton>

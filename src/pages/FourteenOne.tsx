@@ -297,7 +297,7 @@ function FourteenOne() {
             text: 'EI',
             role: 'confirm',
             handler: () => {
-            uHistory.push("/home-page");
+            uHistory.push("/");
             window.location.reload()
             },
           },

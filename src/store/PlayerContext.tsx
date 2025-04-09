@@ -9,6 +9,7 @@ import React, {
   type PlayerContextType = {
     players: string[];
     addPlayer: (name: string) => void;
+    removePlayer: (name: string) => void;
     gameName: string;
     setGameName: (value: string) => void;
     starterMaxRun: string;
@@ -61,6 +62,12 @@ import React, {
       setPlayers(updated);
       localStorage.setItem("players", JSON.stringify(updated));
     };
+
+    const removePlayer = (name: string) => {
+      const updatedPlayers = players.filter((player) => player !== name)
+      setPlayers(updatedPlayers);
+      localStorage.setItem('players', JSON.stringify(updatedPlayers))
+    };
   
     useEffect(() => localStorage.setItem("players", JSON.stringify(players)), [players]);
     useEffect(() => localStorage.setItem("starter", starter), [starter]);
@@ -77,6 +84,7 @@ import React, {
         value={{
           players,
           addPlayer,
+          removePlayer,
           gameName,
           setGameName,
           starterMaxRun,

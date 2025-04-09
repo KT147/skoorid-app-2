@@ -1,28 +1,48 @@
-import { IonButton, IonContent, IonHeader, IonIcon, IonInput, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { addCircle } from 'ionicons/icons'
-import { usePlayers } from '../store/PlayerContext';
-import { useRef } from 'react';
-import { useHistory} from 'react-router-dom';
-
+import {
+  IonButton,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import { addCircle } from "ionicons/icons";
+import { usePlayers } from "../store/PlayerContext";
+import { useRef } from "react";
 
 const AddPlayer: React.FC = () => {
+  const nameRef = useRef<HTMLIonInputElement>(null);
 
-    const nameRef = useRef<HTMLIonInputElement>(null)
+  const { addPlayer, players, removePlayer } = usePlayers();
 
-    const { addPlayer } = usePlayers()
 
-    const history = useHistory()
-
-    const add = () => {
-        const player = String(nameRef.current?.value)
-        if (!player || player.trim() === "") {
-          alert("Tühja nimega ei saa!")
-          return
-        }
-        addPlayer(player)
-        history.push("/home-page")
+  const add = () => {
+    const player = String(nameRef.current?.value);
+    if (!player || player.trim() === "") {
+      alert("Tühja nimega ei saa!");
+      return;
     }
+    addPlayer(player);
+    if (nameRef.current) {
+      nameRef.current.value = "";
+    }
+  }
 
+  const deletePlayer = (index: number) => {
+    const playerToDelete = players[index]
+    const updatedPlayers = [...players]
+    updatedPlayers.splice(index, 1)
+  
+    localStorage.setItem('players', JSON.stringify(updatedPlayers))
+  
+    removePlayer(playerToDelete)
+  };
+  
 
   return (
     <IonPage>
@@ -30,7 +50,7 @@ const AddPlayer: React.FC = () => {
         <IonToolbar>
           <br />
           <br />
-        <IonTitle size="large">Lisa mängija</IonTitle>
+          <IonTitle size="large">Lisa mängija</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -38,14 +58,34 @@ const AddPlayer: React.FC = () => {
           <IonToolbar>
             <IonTitle size="large"></IonTitle>
           </IonToolbar>
-        <br /><br /><br /><br />
+          <br />
+          <br />
+          <br />
+          <br />
         </IonHeader>
-        <IonInput label="Sisesta nimi" labelPlacement="floating" fill="outline" ref={nameRef} className="center-input" ></IonInput>
-        <br /><br />
+        <IonInput
+          label="Sisesta nimi"
+          labelPlacement="floating"
+          fill="outline"
+          ref={nameRef}
+          className="center-input"
+        ></IonInput>
+        <br />
+        <br />
         <IonButton onClick={add} shape="round">
-          <IonIcon icon={addCircle} style={{marginRight:"20px"}}></IonIcon>
+          <IonIcon icon={addCircle} style={{ marginRight: "20px" }}></IonIcon>
           Lisa
         </IonButton>
+        <br /><br />
+        <h1>Mängijad:</h1>
+        <IonList inset={true}>
+          {players.map((player, index) => (
+            <IonItem key={index}>
+              <IonLabel>{player}</IonLabel>
+              <IonButton onClick={() => deletePlayer(index)}>X</IonButton>
+            </IonItem>
+          ))}
+        </IonList>
       </IonContent>
     </IonPage>
   );
