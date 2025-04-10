@@ -21,6 +21,9 @@ const HomePage: React.FC = () => {
   const [checkboxChecked, setCheckboxChecked] = useState(false)
   const [radioChoise, setRadioChoice] = useState(15)
 
+  const [activeButton, setActiveButton] = useState<string>("")
+
+
   useEffect(() => {
       const savedCheckboxValue = localStorage.getItem("checkboxChecked")
       if (savedCheckboxValue !== null) {
@@ -37,6 +40,7 @@ const HomePage: React.FC = () => {
       }
     }, [])
 
+
   const playFourteenOne = () => {
       setGameName ("14-1")
       setFourteenOne(true)
@@ -44,6 +48,7 @@ const HomePage: React.FC = () => {
       setNineBall(false)
       setTenBall(false)
       setSnooker(false)
+      setActiveButton("14-1")
   }
 
   const navigateToEight = () => {
@@ -61,6 +66,7 @@ const HomePage: React.FC = () => {
       setNineBall(false)
       setTenBall(false)
       setSnooker(false)
+      setActiveButton("8-pall")
   }
 
   const navigateToNine = () => {
@@ -77,6 +83,7 @@ const HomePage: React.FC = () => {
       setNineBall(true)
       setTenBall(false)
       setSnooker(false)
+      setActiveButton("9-pall")
   }
 
   const navigateToTen = () => {
@@ -93,6 +100,7 @@ const HomePage: React.FC = () => {
       setNineBall(false)
       setTenBall(true)
       setSnooker(false)
+      setActiveButton("10-pall")
   }
 
   const navigateToSnooker = () => {
@@ -110,6 +118,7 @@ const HomePage: React.FC = () => {
       setNineBall(false)
       setTenBall(false)
       setSnooker(true)
+      setActiveButton("Snuuker")
   }
 
   const navigateToFourteenOne = () => {
@@ -137,7 +146,7 @@ const HomePage: React.FC = () => {
     <IonPage>
       <br /><br /><br />
 
-      <IonContent fullscreen>
+      <IonContent fullscreen scroll-y="true" keyboard-avoidance="true">
         <div>
           <h3>Vali alustav mängija</h3>
           <IonSelect className='ion-select-first' value={starter} onIonChange={(e) => setStarter(e.detail.value)}>
@@ -161,12 +170,12 @@ const HomePage: React.FC = () => {
 
           <br /><br />
           <h3>Vali mäng</h3>
-          <IonButton className='game-button' onClick={playFourteenOne}>14.1</IonButton>
-          <IonButton className='game-button'  onClick={playEightBall}>8-pall</IonButton>
-          <IonButton className='game-button'  onClick={playNineBall}>9-pall</IonButton>
+          <IonButton className={`game-button ${activeButton === "14-1" ? "selected" : ""}`}  onClick={playFourteenOne}>14.1</IonButton>
+          <IonButton className={`game-button ${activeButton === "8-pall" ? "selected" : ""}`}   onClick={playEightBall}>8-pall</IonButton>
+          <IonButton className={`game-button ${activeButton === "9-pall" ? "selected" : ""}`}   onClick={playNineBall}>9-pall</IonButton>
           <br />
-          <IonButton className='game-button'  onClick={playTenBall}>10-pall</IonButton>
-          <IonButton className='game-button'  onClick={playSnooker}>Snuuker</IonButton>
+          <IonButton className={`game-button ${activeButton === "10-pall" ? "selected" : ""}`}   onClick={playTenBall}>10-pall</IonButton>
+          <IonButton className={`game-button ${activeButton === "Snuuker" ? "selected" : ""}`}   onClick={playSnooker}>Snuuker</IonButton>
 
           {fourteenOne === true &&
             <div>
@@ -176,6 +185,7 @@ const HomePage: React.FC = () => {
                 type="number"
                 value={winnings}
                 onIonChange={(e) => setWinnings(e.detail.value!)}
+                autofocus
               />
               <h3>punktini</h3>
               <IonButton onClick={navigateToFourteenOne}>Alusta</IonButton>
@@ -190,6 +200,7 @@ const HomePage: React.FC = () => {
                 type="number"
                 value={winnings}
                 onIonChange={(e) => setWinnings(e.detail.value!)}
+                autofocus
               />
               <h3>võiduni</h3>
               <IonButton onClick={navigateToEight}>Alusta</IonButton>
@@ -204,6 +215,7 @@ const HomePage: React.FC = () => {
                 type="number"
                 value={winnings}
                 onIonChange={(e) => setWinnings(e.detail.value!)}
+                autofocus
               />
               <h3>võiduni</h3>
               <span>Võitja teeb avalöögi?</span>
@@ -224,6 +236,7 @@ const HomePage: React.FC = () => {
                 type="number"
                 value={winnings}
                 onIonChange={(e) => setWinnings(e.detail.value!)}
+                autofocus
               />
               <h3>võiduni</h3>
               <span>Võitja teeb avalöögi?</span>
@@ -244,6 +257,7 @@ const HomePage: React.FC = () => {
                 type="number"
                 value={winnings}
                 onIonChange={(e) => setWinnings(e.detail.value!)}
+                autofocus
               />
               <h3>võiduni</h3>
               <IonCheckbox

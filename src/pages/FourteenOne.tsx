@@ -58,6 +58,7 @@ function FourteenOne() {
     localStorage.setItem("winnings", winnings)
   }, [winnings])
 
+
   const saveHistory = () => {
     setHistory(prevHistory => [
       ...prevHistory,
@@ -233,7 +234,7 @@ function FourteenOne() {
       <br />
       <br />
       <br />
-      <IonContent fullscreen scrollY={true} className="ion-padding" keyboardAvoidanceBehavior="padding">
+      <IonContent>
         <IonCard>
           <IonCardContent>
             <IonText>
@@ -247,7 +248,7 @@ function FourteenOne() {
               <br /><br /><br />
               <IonCard>
                 <IonCardContent>
-                  <div onClick={changeStarterToActive} style={{ backgroundColor: starterIsActive ? "#F1C40F" : '' }}>
+                  <div onClick={changeStarterToActive} className={starterIsActive ? "active-player" : ""}>
                     <h1>{starter}</h1>
                     <h1>Skoor: {starterScore}</h1>
                     <div>Aktiivne punktiseeria: {starterCurrentRun}</div>
@@ -261,7 +262,7 @@ function FourteenOne() {
                     </div>}
                   </div>
 
-                  <div onClick={changeOpponentToActive} style={{ backgroundColor: opponentIsActive ? "#F1C40F" : '' }}>
+                  <div onClick={changeOpponentToActive} className={opponentIsActive ? "active-player" : ""}>
                     {opponentIsActive === true && <div>
                       <IonButton style={{marginRight:"20px"}} onClick={updateOpponentScore} disabled={starterScore === Number(winnings) || opponentScore === Number(winnings)}>-</IonButton>
                       <IonButton onClick={opponentFoul} disabled={starterScore === Number(winnings) || opponentScore === Number(winnings)}>Viga</IonButton>

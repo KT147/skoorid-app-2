@@ -69,6 +69,7 @@ const AddPlayer: React.FC = () => {
           fill="outline"
           ref={nameRef}
           className="center-input"
+          autocapitalize="words"
         ></IonInput>
         <br />
         <br />
@@ -82,7 +83,7 @@ const AddPlayer: React.FC = () => {
           {players.map((player, index) => (
             <IonItem key={index}>
               <IonLabel>{player}</IonLabel>
-              <IonButton onClick={() => deletePlayer(index)}>X</IonButton>
+              <IonButton onClick={() => deletePlayer(index)}>Eemalda</IonButton>
             </IonItem>
           ))}
         </IonList>

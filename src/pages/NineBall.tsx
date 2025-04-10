@@ -146,7 +146,6 @@ function NineBall() {
       <br />
       <br />
       <br />
-      <br />
       <IonContent>
       <IonCard>
         <div style={{ padding: "20px" }}>
@@ -169,6 +168,7 @@ function NineBall() {
           <h1>{starterScore}</h1>
           <IonButton
             onClick={() => increaseScore(starter)}
+            style={{paddingRight: "20px"}}
             disabled={
               starterScore === Number(winnings) ||
               opponentScore === Number(winnings)
@@ -207,6 +207,7 @@ function NineBall() {
           <h1>{opponentScore}</h1>
           <IonButton
             onClick={() => increaseScore(opponent)}
+            style={{paddingRight: "20px"}}
             disabled={
               starterScore === Number(winnings) ||
               opponentScore === Number(winnings)

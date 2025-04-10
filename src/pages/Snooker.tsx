@@ -273,7 +273,7 @@ function Snooker() {
             <IonIcon icon={backspace} />
           </IonButton>
 
-          <div onClick={changeStarterToActive} style={{ backgroundColor: starterIsActive ? "#F1C40F" : "" }}>
+          <div onClick={changeStarterToActive} className={starterIsActive ? "active-player" : ""}>
             <h1>{starter}</h1>
             <h1>Skoor: {starterScore}</h1>
             {starterIsActive &&
@@ -298,7 +298,7 @@ function Snooker() {
             <div>Suurim punktiseeria: {starterMaxRun}</div>
           </div>
 
-          <div onClick={changeOpponentToActive} style={{ backgroundColor: opponentIsActive ? "#F1C40F" : '' }}>
+          <div onClick={changeOpponentToActive} className={opponentIsActive ? "active-player" : ""}>
             <h1>{opponent}</h1>
             <h1>Skoor: {opponentScore}</h1>
             {opponentIsActive &&
@@ -310,7 +310,7 @@ function Snooker() {
                     '--background': btn.backgroundColor,
                     color: btn.color,
                     borderRadius: "50%",
-                    height: "45px",
+                    height: "35px",
                   }}
                   disabled={totalPoints === 27 && btn.value === 1 || starterScore === Number(winnings) || opponentScore === Number(winnings) || totalPoints === 0}
                 >
