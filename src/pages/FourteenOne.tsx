@@ -233,7 +233,7 @@ function FourteenOne() {
       <br />
       <br />
       <br />
-      <IonContent>
+      <IonContent fullscreen scrollY={true} className="ion-padding" keyboardAvoidanceBehavior="padding">
         <IonCard>
           <IonCardContent>
             <IonText>

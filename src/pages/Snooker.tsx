@@ -18,6 +18,7 @@ type HistoryState = {
     starterMaxRun: number;
     opponentMaxRun: number;
     totalPoints: number | undefined;  
+    freeBallCount: number;
   };
 
 function Snooker() {
@@ -65,6 +66,8 @@ function Snooker() {
 
   const [gameStartTime, setGameStartTimeLocal] = useState<string>("");
 
+  const [freeBallCount, setFreeBallCount] = useState<number>(0);
+
   useEffect(() => {
     const startTime = new Date().toISOString();
     setGameStartTimeLocal(startTime);
@@ -102,6 +105,7 @@ function Snooker() {
         starterMaxRun,
         opponentMaxRun,
         totalPoints,
+        freeBallCount
       },
     ]);
   };
@@ -166,10 +170,13 @@ function Snooker() {
     setStarterMaxRun(lastState.starterMaxRun);
     setOpponentMaxRun(lastState.opponentMaxRun);
     setTotalPoints(lastState.totalPoints);
+    setFreeBallCount(lastState.freeBallCount)
   };
 
   const freeBall = () => {
+    saveHistory()
     setTotalPoints(totalPoints! + 8);
+    setFreeBallCount(freeBallCount + 1)
   };
 
   const resetTotalPoints = () => {
