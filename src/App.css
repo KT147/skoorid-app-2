@@ -137,9 +137,15 @@ table {
   
 .starting-table{
     font-size: 50px;
+    color: black;
+    font-weight: bold;
 }
 
 .active-player{
   background: linear-gradient(to right, #F1C40F, #FFA500);
   border-radius: 10px;
+}
+
+.home-page-titles{
+  font-family: 'Times New Roman', Times, serif;
 }

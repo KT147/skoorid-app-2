@@ -12,7 +12,9 @@ type Button = {
 
 type HistoryState = {
     starterPoints: number;
+    starterScore:number;
     opponentPoints: number;
+    opponentScore: number;
     starterCurrentRun: number[];
     opponentCurrentRun: number[];
     starterMaxRun: number;
@@ -105,7 +107,9 @@ function Snooker() {
         starterMaxRun,
         opponentMaxRun,
         totalPoints,
-        freeBallCount
+        freeBallCount,
+        starterScore,
+        opponentScore
       },
     ]);
   };
@@ -164,7 +168,9 @@ function Snooker() {
     setHistory((prevHistory) => prevHistory.slice(0, -1));
 
     setStarterPoints(lastState.starterPoints);
+    setStarterScore(lastState.starterScore);
     setOpponentPoints(lastState.opponentPoints);
+    setOpponentScore(lastState.opponentScore);
     setStarterCurrentRun(lastState.starterCurrentRun);
     setOpponentCurrentRun(lastState.opponentCurrentRun);
     setStarterMaxRun(lastState.starterMaxRun);
