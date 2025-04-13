@@ -1,5 +1,6 @@
 import {
   IonButton,
+  IonCard,
   IonContent,
   IonHeader,
   IonIcon,
@@ -46,13 +47,7 @@ const AddPlayer: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <br />
-          <br />
-          <IonTitle size="large">Lisa mängija</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <br /><br /><br />
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -63,6 +58,9 @@ const AddPlayer: React.FC = () => {
           <br />
           <br />
         </IonHeader>
+        <IonCard className="home-card">
+            <h3 className="home-page-titles">Lisa mängija</h3>
+          </IonCard>
         <IonInput
           label="Sisesta nimi"
           labelPlacement="floating"
@@ -77,8 +75,10 @@ const AddPlayer: React.FC = () => {
           <IonIcon icon={addCircle} style={{ marginRight: "20px" }}></IonIcon>
           Lisa
         </IonButton>
-        <br /><br />
-        <h1>Mängijad:</h1>
+        <br /><br /><br />
+        <IonCard className="home-card">
+            <h3 className="home-page-titles">Mängijad:</h3>
+          </IonCard>
         <IonList inset={true}>
           {players.map((player, index) => (
             <IonItem key={index}>

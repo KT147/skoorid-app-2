@@ -115,7 +115,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    font-size: 14px; 
+    font-size: 10px; 
   }
   
 
@@ -147,5 +147,15 @@ table {
 }
 
 .home-page-titles{
-  font-family: 'Times New Roman', Times, serif;
+  font-family:'Times New Roman', Times, serif;
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.home-card{
+  margin-left: 70px;
+  margin-right: 70px;
+}
+
+.players-list{
+  background-color: white;
 }
