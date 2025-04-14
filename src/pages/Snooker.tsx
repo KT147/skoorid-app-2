@@ -1,7 +1,17 @@
 import { useState, useEffect } from "react";
 import { usePlayers } from "../store/PlayerContext";
-import { IonButton, IonContent, IonPage, IonIcon, IonHeader, IonToolbar, IonTitle, IonCard, IonAlert } from '@ionic/react';
-import {  backspace } from 'ionicons/icons';
+import {
+  IonButton,
+  IonContent,
+  IonPage,
+  IonIcon,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonCard,
+  IonAlert,
+} from "@ionic/react";
+import { backspace } from "ionicons/icons";
 import { useHistory } from "react-router";
 
 type Button = {
@@ -11,17 +21,17 @@ type Button = {
 };
 
 type HistoryState = {
-    starterPoints: number;
-    starterScore:number;
-    opponentPoints: number;
-    opponentScore: number;
-    starterCurrentRun: number[];
-    opponentCurrentRun: number[];
-    starterMaxRun: number;
-    opponentMaxRun: number;
-    totalPoints: number | undefined;  
-    freeBallCount: number;
-  };
+  starterPoints: number;
+  starterScore: number;
+  opponentPoints: number;
+  opponentScore: number;
+  starterCurrentRun: number[];
+  opponentCurrentRun: number[];
+  starterMaxRun: number;
+  opponentMaxRun: number;
+  totalPoints: number | undefined;
+  freeBallCount: number;
+};
 
 function Snooker() {
   const {
@@ -40,11 +50,11 @@ function Snooker() {
     { backgroundColor: "blue", color: "white", value: 5 },
     { backgroundColor: "#8B4513", color: "white", value: 4 },
     { backgroundColor: "green", color: "white", value: 3 },
-    { backgroundColor: "yellow", color: "black", value: 2 }
+    { backgroundColor: "yellow", color: "black", value: 2 },
   ];
 
   const [history, setHistory] = useState<HistoryState[]>([]);
-  const uHistory = useHistory()
+  const uHistory = useHistory();
 
   const [message, setMessage] = useState<string>("");
   const [radioChoise, setRadioChoice] = useState<number | undefined>();
@@ -109,7 +119,7 @@ function Snooker() {
         totalPoints,
         freeBallCount,
         starterScore,
-        opponentScore
+        opponentScore,
       },
     ]);
   };
@@ -176,13 +186,13 @@ function Snooker() {
     setStarterMaxRun(lastState.starterMaxRun);
     setOpponentMaxRun(lastState.opponentMaxRun);
     setTotalPoints(lastState.totalPoints);
-    setFreeBallCount(lastState.freeBallCount)
+    setFreeBallCount(lastState.freeBallCount);
   };
 
   const freeBall = () => {
-    saveHistory()
+    saveHistory();
     setTotalPoints(totalPoints! + 8);
-    setFreeBallCount(freeBallCount + 1)
+    setFreeBallCount(freeBallCount + 1);
   };
 
   const resetTotalPoints = () => {
@@ -246,126 +256,183 @@ function Snooker() {
       gameEndTime: endTime,
     };
 
-    fetch("https://skoorid-database-default-rtdb.europe-west1.firebasedatabase.app/skoorid.json", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(gameData),
-    }).then((res) => res.json()).then(() => {
-      window.location.reload()
-    })
+    fetch(
+      "https://skoorid-database-default-rtdb.europe-west1.firebasedatabase.app/skoorid.json",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(gameData),
+      }
+    )
+      .then((res) => res.json())
+      .then(() => {
+        window.location.reload();
+      });
   };
 
   return (
     <IonPage>
-        <IonHeader>
+      <IonHeader className="score-card">
         <IonToolbar>
           <br />
           <br />
           <IonTitle>{gameName}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <br />
-      <IonContent>
-      <IonCard>
-        <div style={{ padding: '20px' }}>
-          <h2>{message}</h2>
-          <div>Punkte laual: {totalPoints}</div>
-          <div>Punktide vahe: {Math.abs(starterPoints - opponentPoints)}</div>
-          <br />
 
-          <IonButton onClick={undo} disabled={starterScore === Number(winnings) || opponentScore === Number(winnings)}>
-            <IonIcon icon={backspace} />
-          </IonButton>
+      <IonContent fullscreen>
+        <IonCard>
+          <div style={{ padding: "20px" }}>
+            <h2>{message}</h2>
+            <div>Punkte laual: {totalPoints}</div>
+            <div>Punktide vahe: {Math.abs(starterPoints - opponentPoints)}</div>
+            <br />
 
-          <div onClick={changeStarterToActive} className={starterIsActive ? "active-player" : ""}>
-            <h1>{starter}</h1>
-            <h1>Skoor: {starterScore}</h1>
-            {starterIsActive &&
-              buttons.map((btn, index) => (
+            <IonButton
+              onClick={undo}
+              disabled={
+                starterScore === Number(winnings) ||
+                opponentScore === Number(winnings)
+              }
+            >
+              <IonIcon icon={backspace} />
+            </IonButton>
+            <div
+              onClick={changeStarterToActive}
+              className={starterIsActive ? "active-player" : ""}
+            >
+              <h1>{starter}</h1>
+              <h1>Skoor: {starterScore}</h1>
+              {starterIsActive &&
+                buttons.map((btn, index) => (
+                  <IonButton
+                    onClick={() => raiseScore(starter, btn)}
+                    key={index}
+                    style={{
+                      "--background": btn.backgroundColor,
+                      color: btn.color,
+                      borderRadius: "50%",
+                      height: "35px",
+                    }}
+                    disabled={
+                      (totalPoints === 27 && btn.value === 1) ||
+                      starterScore === Number(winnings) ||
+                      opponentScore === Number(winnings) ||
+                      totalPoints === 0
+                    }
+                  >
+                    {btn.value}
+                  </IonButton>
+                ))}
+              {starterIsActive && (
                 <IonButton
-                  onClick={() => raiseScore(starter, btn)}
-                  key={index}
-                  style={{
-                    '--background': btn.backgroundColor,
-                    color: btn.color,
-                    borderRadius: "50%",
-                    height: "35px",
-                  }}
-                  disabled={totalPoints === 27 && btn.value === 1 || starterScore === Number(winnings) || opponentScore === Number(winnings) || totalPoints === 0}
+                  onClick={freeBall}
+                  style={{ padding: "10px 5px" }}
+                  disabled={
+                    starterScore === Number(winnings) ||
+                    opponentScore === Number(winnings)
+                  }
                 >
-                  {btn.value}
+                  Vaba pall
                 </IonButton>
-              ))}
-            {starterIsActive && <IonButton onClick={freeBall} style={{ padding: "10px 5px" }} disabled={starterScore === Number(winnings) || opponentScore === Number(winnings)}>Vaba pall</IonButton>}
-            <h1>Punktid: {starterPoints}</h1>
-            <div>Aktiivne punktiseeria: {starterCurrentRun.reduce((acc, val) => acc + val, 0)}</div>
-            <div>Suurim punktiseeria: {starterMaxRun}</div>
-          </div>
+              )}
+              <h1>Punktid: {starterPoints}</h1>
+              <div>
+                Aktiivne punktiseeria:{" "}
+                {starterCurrentRun.reduce((acc, val) => acc + val, 0)}
+              </div>
+              <div>Suurim punktiseeria: {starterMaxRun}</div>
+            </div>
 
-          <div onClick={changeOpponentToActive} className={opponentIsActive ? "active-player" : ""}>
-            <h1>{opponent}</h1>
-            <h1>Skoor: {opponentScore}</h1>
-            {opponentIsActive &&
-              buttons.map((btn, index) => (
+            <div
+              onClick={changeOpponentToActive}
+              className={opponentIsActive ? "active-player" : ""}
+            >
+              <h1>{opponent}</h1>
+              <h1>Skoor: {opponentScore}</h1>
+              {opponentIsActive &&
+                buttons.map((btn, index) => (
+                  <IonButton
+                    onClick={() => raiseScore(opponent, btn)}
+                    key={index}
+                    style={{
+                      "--background": btn.backgroundColor,
+                      color: btn.color,
+                      borderRadius: "50%",
+                      height: "35px",
+                    }}
+                    disabled={
+                      (totalPoints === 27 && btn.value === 1) ||
+                      starterScore === Number(winnings) ||
+                      opponentScore === Number(winnings) ||
+                      totalPoints === 0
+                    }
+                  >
+                    {btn.value}
+                  </IonButton>
+                ))}
+              {opponentIsActive && (
                 <IonButton
-                  onClick={() => raiseScore(opponent, btn)}
-                  key={index}
-                  style={{
-                    '--background': btn.backgroundColor,
-                    color: btn.color,
-                    borderRadius: "50%",
-                    height: "35px",
-                  }}
-                  disabled={totalPoints === 27 && btn.value === 1 || starterScore === Number(winnings) || opponentScore === Number(winnings) || totalPoints === 0}
+                  onClick={freeBall}
+                  style={{ padding: "10px 5px" }}
+                  disabled={
+                    starterScore === Number(winnings) ||
+                    opponentScore === Number(winnings)
+                  }
                 >
-                  {btn.value}
+                  Vaba pall
                 </IonButton>
-              ))}
-            {opponentIsActive && <IonButton onClick={freeBall} style={{ padding: "10px 5px" }} disabled={starterScore === Number(winnings) || opponentScore === Number(winnings)}>Vaba pall</IonButton>}
-            <h1>Punktid: {opponentPoints}</h1>
-            <div>Aktiivne punktiseeria: {opponentCurrentRun.reduce((acc, val) => acc + val, 0)}</div>
-            <div>Suurim punktiseeria: {opponentMaxRun}</div>
+              )}
+              <h1>Punktid: {opponentPoints}</h1>
+              <div>
+                Aktiivne punktiseeria:{" "}
+                {opponentCurrentRun.reduce((acc, val) => acc + val, 0)}
+              </div>
+              <div>Suurim punktiseeria: {opponentMaxRun}</div>
+            </div>
           </div>
-          </div>
-          </IonCard>
+        </IonCard>
 
-          <br />
-          {totalPoints! < Math.abs(starterPoints - opponentPoints) && <IonButton onClick={newFrame}>Lõpeta freim</IonButton>}
+        <br />
+        {totalPoints! < Math.abs(starterPoints - opponentPoints) && (
+          <IonButton onClick={newFrame}>Lõpeta freim</IonButton>
+        )}
 
-          <br /><br />
-          <IonButton id="present-alert" shape="round" color="primary">
-            Lõpeta mäng
-          </IonButton>
-          <IonAlert
-        header="Kas salvestada tulemused?"
-        trigger="present-alert"
-        buttons={[
-          {
-            text: 'TAGASI',
-            role: 'cancel',
-            handler: () => {
-              console.log('Alert canceled');
+        <br />
+        <br />
+        <IonButton id="present-alert" shape="round" color="primary">
+          Lõpeta mäng
+        </IonButton>
+        <IonAlert
+          header="Kas salvestada tulemused?"
+          trigger="present-alert"
+          buttons={[
+            {
+              text: "TAGASI",
+              role: "cancel",
+              handler: () => {
+                console.log("Alert canceled");
+              },
             },
-          },
-          {
-            text: 'EI',
-            role: 'confirm',
-            handler: () => {
-            uHistory.push("/");
-            window.location.reload()
+            {
+              text: "EI",
+              role: "confirm",
+              handler: () => {
+                uHistory.push("/");
+                window.location.reload();
+              },
             },
-          },
-          {
-            text: 'JAH',
-            role: 'confirm',
-            handler: () => {
-              navigateToScore();
+            {
+              text: "JAH",
+              role: "confirm",
+              handler: () => {
+                navigateToScore();
+              },
             },
-          },
-        ]}
-      ></IonAlert>
+          ]}
+        ></IonAlert>
       </IonContent>
     </IonPage>
   );
