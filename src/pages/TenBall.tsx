@@ -4,12 +4,13 @@ import {
   IonButton,
   IonContent,
   IonPage,
+  IonImg,
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonImg,
   IonCard,
   IonAlert,
+  IonText,
 } from "@ionic/react";
 import { useHistory } from "react-router";
 
@@ -128,142 +129,143 @@ function TenBall() {
         },
         body: JSON.stringify(gameData),
       }
-    ).then((res) => res.json()).then(() => {
-      window.location.reload()
-    });
+    )
+      .then((res) => res.json())
+      .then(() => {
+        window.location.reload();
+      });
   };
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="score-card">
         <IonToolbar>
           <br />
           <br />
           <IonTitle>{gameName}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <br />
-      <br />
-      <br />
-      <br />
-      <IonContent>
-      <IonCard>
-        <div style={{ padding: "20px" }}>
-          <h2>{message}</h2>
+      <IonContent fullscreen>
+        <IonCard>
+          <IonText>
+            <h2>{message}</h2>
+          </IonText>
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-          >
-            {selectActivePlayer === starter && (
-              <IonImg src="/arrow.png" style={{ height: "30px" }} />
-            )}
-            <h1>{starter}</h1>
-          </div>
+          <div className="scores-container">
+            <div className="score-box">
+              <div className="player-header">
+                <div className="arrow-wrapper">
+                  {selectActivePlayer === starter && (
+                    <IonImg src="/arrow.png" className="arrow-icon" />
+                  )}
+                </div>
+                <IonText>
+                  <h1>{starter}</h1>
+                </IonText>
+              </div>
+              <IonText>
+                <h1>{starterScore}</h1>
+              </IonText>
+              <div className="score-buttons">
+                <IonButton
+                  onClick={() => increaseScore(starter)}
+                  style={{ paddingRight: "20px" }}
+                  disabled={
+                    starterScore === Number(winnings) ||
+                    opponentScore === Number(winnings)
+                  }
+                >
+                  +
+                </IonButton>
+                <IonButton
+                  onClick={() => decreaseScore(starter)}
+                  disabled={
+                    starterScore === Number(winnings) ||
+                    opponentScore === Number(winnings)
+                  }
+                >
+                  -
+                </IonButton>
+              </div>
+            </div>
 
-          <h1>{starterScore}</h1>
-          <IonButton
-            onClick={() => increaseScore(starter)}
-            style={{paddingRight: "20px"}}
-            disabled={
-              starterScore === Number(winnings) ||
-              opponentScore === Number(winnings)
-            }
-          >
-            +
-          </IonButton>
-          <IonButton
-            onClick={() => decreaseScore(starter)}
-            disabled={
-              starterScore === Number(winnings) ||
-              opponentScore === Number(winnings)
-            }
-          >
-            -
-          </IonButton>
-          <br />
-          <br />
-          <br />
-          <br />
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-          >
-            {selectActivePlayer === opponent && (
-              <IonImg src="/arrow.png" style={{ height: "30px" }} />
-            )}
-            <h1>{opponent}</h1>
-          </div>
-
-          <h1>{opponentScore}</h1>
-          <IonButton
-            onClick={() => increaseScore(opponent)}
-            style={{paddingRight: "20px"}}
-            disabled={
-              starterScore === Number(winnings) ||
-              opponentScore === Number(winnings)
-            }
-          >
-            +
-          </IonButton>
-          <IonButton
-            onClick={() => decreaseScore(opponent)}
-            disabled={
-              starterScore === Number(winnings) ||
-              opponentScore === Number(winnings)
-            }
-          >
-            -
-          </IonButton>
+            <div className="score-box">
+              <div className="player-header">
+                <div className="arrow-wrapper">
+                  {selectActivePlayer === opponent && (
+                    <IonImg src="/arrow.png" className="arrow-icon" />
+                  )}
+                </div>
+                <IonText>
+                  <h1>{opponent}</h1>
+                </IonText>
+              </div>
+              <IonText>
+                <h1>{opponentScore}</h1>
+              </IonText>
+              <div className="score-buttons">
+                <IonButton
+                  onClick={() => increaseScore(opponent)}
+                  style={{ paddingRight: "20px" }}
+                  disabled={
+                    starterScore === Number(winnings) ||
+                    opponentScore === Number(winnings)
+                  }
+                >
+                  +
+                </IonButton>
+                <IonButton
+                  onClick={() => decreaseScore(opponent)}
+                  disabled={
+                    starterScore === Number(winnings) ||
+                    opponentScore === Number(winnings)
+                  }
+                >
+                  -
+                </IonButton>
+              </div>
+            </div>
           </div>
           <br />
           <br />
-          <br />
-          </IonCard>
-          <br />
-          <br />
-          <br />
+        </IonCard>
 
-          <IonButton id="present-alert" shape="round" color="primary">
-            Lõpeta mäng
-          </IonButton>
-          <IonAlert
-        header="Kas salvestada tulemused?"
-        trigger="present-alert"
-        buttons={[
-          {
-            text: 'TAGASI',
-            role: 'cancel',
-            handler: () => {
-              console.log('Alert canceled');
+        <IonButton
+          className="end-game-btn"
+          id="present-alert"
+          shape="round"
+          color="primary"
+        >
+          Lõpeta mäng
+        </IonButton>
+        <IonAlert
+          header="Kas salvestada tulemused?"
+          trigger="present-alert"
+          buttons={[
+            {
+              text: "TAGASI",
+              role: "cancel",
+              handler: () => {
+                console.log("Alert canceled");
+              },
             },
-          },
-          {
-            text: 'EI',
-            role: 'confirm',
-            handler: () => {
-            history.push("/");
-            window.location.reload()
+            {
+              text: "EI",
+              role: "confirm",
+              handler: () => {
+                history.push("/");
+                window.location.reload();
+              },
             },
-          },
-          {
-            text: 'JAH',
-            role: 'confirm',
-            handler: () => {
-              navigateToScore();
+            {
+              text: "JAH",
+              role: "confirm",
+              handler: () => {
+                navigateToScore();
+              },
             },
-          },
-        ]}
-      ></IonAlert>
+          ]}
+        ></IonAlert>
       </IonContent>
     </IonPage>
   );

@@ -4,6 +4,12 @@
     --ion-background-color: linear-gradient(to bottom, rgb(158, 223, 73), rgb(102, 204, 102));
 }
 
+.nunito {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 ion-tab-bar {
   --ion-background-color: rgb(158, 223, 73);
 }
@@ -147,8 +153,7 @@ table {
 }
 
 .home-page-titles{
-  font-family:'Times New Roman', Times, serif;
-  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.2);
+  font-family:"Nunito", sans-serif;
 }
 
 .home-card{
@@ -158,4 +163,100 @@ table {
 
 .players-list{
   background-color: white;
+}
+
+.undo-btn{
+  margin-left: 30px;
+}
+
+.score-card {
+  margin-bottom: 3rem;
+}
+
+.scores-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.score-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.end-game-btn{
+  margin-top: 3rem;
+}
+
+.player-name-wrapper {
+  position: relative;
+  padding-left: 40px; 
+  display: flex;
+  align-items: center;
+}
+
+.arrow-icon {
+  position: absolute;
+  left: 0;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.arrow-icon.hidden {
+  visibility: hidden;
+}
+
+.arrow-wrapper {
+  position: absolute;
+  left: -35px; 
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.arrow-icon.hidden {
+  visibility: hidden;
+}
+
+
+
+
+
+
+/* Kui orientatsioon on horisontaalne */
+@media (orientation: landscape) {
+  .scores-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 14rem;
+  }
+
+  .score-card{
+    margin-bottom: 0rem;
+  }
+
+  .end-game-btn{
+    margin-top: 0rem;
+  }
 }

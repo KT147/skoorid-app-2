@@ -193,6 +193,11 @@ function FourteenOne() {
     setOpponentFoulCount(lastState.opponentFoulCount)
   }
 
+  const removeBall = () =>{
+    saveHistory()
+    setStartingTable(startingTable - 1)
+  }
+
   const navigateToScore = () => {
     uHistory.push("/scores")
     const endTime = new Date().toISOString()
@@ -242,7 +247,8 @@ function FourteenOne() {
               <div className="starting-table">{startingTable}</div>
               <div>Mäng käib {winnings} punktini</div><br />
 
-              <IonButton onClick={undo} disabled={starterScore === Number(winnings) || opponentScore === Number(winnings)}>
+              <IonButton onClick={removeBall} disabled={starterScore === Number(winnings) || opponentScore === Number(winnings)}>1 pall vähemaks</IonButton>
+              <IonButton className="undo-btn" onClick={undo} disabled={starterScore === Number(winnings) || opponentScore === Number(winnings)}>
               <IonIcon icon={backspace} />
               </IonButton>
               <br /><br /><br />

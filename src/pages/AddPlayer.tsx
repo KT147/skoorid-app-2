@@ -59,7 +59,7 @@ const AddPlayer: React.FC = () => {
           <br />
         </IonHeader>
         <IonCard className="home-card">
-            <h3 className="home-page-titles">Lisa mängija</h3>
+            <h5 className="home-page-titles">Lisa mängija</h5>
           </IonCard>
         <IonInput
           label="Sisesta nimi"
@@ -77,7 +77,7 @@ const AddPlayer: React.FC = () => {
         </IonButton>
         <br /><br /><br />
         <IonCard className="home-card">
-            <h3 className="home-page-titles">Mängijad:</h3>
+            <h5 className="home-page-titles">Mängijad:</h5>
           </IonCard>
         <IonList inset={true}>
           {players.map((player, index) => (
