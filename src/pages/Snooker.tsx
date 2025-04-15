@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { usePlayers } from "../store/PlayerContext";
+import { ScreenOrientation } from '@capacitor/screen-orientation';
 import {
   IonButton,
   IonContent,
@@ -11,7 +12,7 @@ import {
   IonCard,
   IonAlert,
 } from "@ionic/react";
-import { backspace } from "ionicons/icons";
+import { returnUpBackOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 
 type Button = {
@@ -105,6 +106,23 @@ function Snooker() {
   useEffect(() => {
     localStorage.setItem("winnings", winnings);
   }, [winnings]);
+
+  useEffect(() => {
+    const lockOrientation = async () => {
+      try {
+        await ScreenOrientation.lock({ orientation: 'portrait' });
+      } catch (err) {
+        console.warn("Orientation lock failed:", err);
+      }
+    };
+  
+    lockOrientation();
+  
+    return () => {
+      ScreenOrientation.unlock();
+    };
+  }, []);
+  
 
   const saveHistory = () => {
     setHistory((prevHistory) => [
@@ -297,11 +315,11 @@ function Snooker() {
                 opponentScore === Number(winnings)
               }
             >
-              <IonIcon icon={backspace} />
+              <IonIcon icon={returnUpBackOutline} />
             </IonButton>
             <div
               onClick={changeStarterToActive}
-              className={starterIsActive ? "active-player" : ""}
+              className={starterIsActive ? "active-player-snooker" : ""}
             >
               <h1>{starter}</h1>
               <h1>Skoor: {starterScore}</h1>
@@ -317,7 +335,7 @@ function Snooker() {
                       height: "35px",
                     }}
                     disabled={
-                      (totalPoints === 27 && btn.value === 1) ||
+                      (totalPoints !== undefined && totalPoints <= 27 && btn.value === 1) ||
                       starterScore === Number(winnings) ||
                       opponentScore === Number(winnings) ||
                       totalPoints === 0
@@ -348,7 +366,7 @@ function Snooker() {
 
             <div
               onClick={changeOpponentToActive}
-              className={opponentIsActive ? "active-player" : ""}
+              className={opponentIsActive ? "active-player-snooker" : ""}
             >
               <h1>{opponent}</h1>
               <h1>Skoor: {opponentScore}</h1>
@@ -364,7 +382,7 @@ function Snooker() {
                       height: "35px",
                     }}
                     disabled={
-                      (totalPoints === 27 && btn.value === 1) ||
+                      (totalPoints !== undefined && totalPoints <= 27 && btn.value === 1) ||
                       starterScore === Number(winnings) ||
                       opponentScore === Number(winnings) ||
                       totalPoints === 0

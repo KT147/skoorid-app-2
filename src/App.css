@@ -152,6 +152,11 @@ table {
   border-radius: 10px;
 }
 
+.active-player-snooker{
+  background: linear-gradient(to right, #F1C40F, #FFA500);
+  border-radius: 10px;
+}
+
 .home-page-titles{
   font-family:"Nunito", sans-serif;
 }
@@ -288,6 +293,10 @@ table {
 
   .active-player{
     width: 150px;
+  }
+
+  table {
+    font-size: 14px; 
   }
 }
 

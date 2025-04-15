@@ -14,7 +14,7 @@ import {
   IonAlert,
 } from "@ionic/react";
 import { useHistory } from "react-router";
-import { backspace } from "ionicons/icons";
+import { returnUpBackOutline } from "ionicons/icons";
 
 function FourteenOne() {
   const {
@@ -47,8 +47,8 @@ function FourteenOne() {
   const [opponentCurrentRun, setOpponentCurrentRun] = useState(0);
   const [opponentMaxRun, setOpponentMaxRun] = useState(0);
 
-  const [starterFoulCount, setStarterFoulCount] = useState(0);
-  const [opponentFoulCount, setOpponentFoulCount] = useState(0);
+  const [starterFoulCount, setStarterFoulCount] = useState<number>(0);
+  const [opponentFoulCount, setOpponentFoulCount] = useState<number>(0);
 
   const [gameStartTime, setGameStartTimeLocal] = useState("");
 
@@ -167,6 +167,29 @@ function FourteenOne() {
     });
   };
 
+  // CHATGPT soovitus:
+  // mitte teha setState'i sees teist setState'i
+  // const starterFoul = () => {
+  //   saveHistory();
+  
+  //   let newFoulCount = starterFoulCount + 1;
+  //   let penalty = 1;
+  
+  //   if (startingTable === 15 && starterScore === 0 && opponentScore === 0) {
+  //     penalty = 2;
+  //   }
+  
+  //   if (newFoulCount === 3) {
+  //     penalty += 15;
+  //     newFoulCount = 0;
+  //   }
+  
+  //   setStarterScore((prev) => prev - penalty);
+  //   setStarterFoulCount(newFoulCount);
+  //   setStarterCurrentRun(0);
+  // };
+  
+
   const opponentFoul = () => {
     saveHistory();
     if (startingTable === 15 && starterScore === 0 && opponentScore === 0) {
@@ -278,7 +301,7 @@ function FourteenOne() {
                   opponentScore === Number(winnings)
                 }
               >
-                <IonIcon icon={backspace} />
+                <IonIcon icon={returnUpBackOutline} />
               </IonButton>
               </span>
               <br />

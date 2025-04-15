@@ -36,14 +36,16 @@ const HomePage: React.FC = () => {
     } else {
       setCheckboxChecked(false);
     }
+
+    const savedRadioChoice = localStorage.getItem("radioChoise");
+    if (savedRadioChoice !== null) {
+      setRadioChoice(Number(savedRadioChoice))
+    }
   }, []);
 
   useEffect(() => {
-    const savedRadioChoice = localStorage.getItem("radioChoise");
-    if (savedRadioChoice !== null) {
-      setRadioChoice(Number(savedRadioChoice));
-    }
-  }, []);
+    localStorage.setItem("radioChoise", radioChoise.toString())
+  }, [radioChoise]);
 
   const playFourteenOne = () => {
     setGameName("14-1");
