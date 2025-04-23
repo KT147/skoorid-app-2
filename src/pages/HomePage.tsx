@@ -241,6 +241,9 @@ const HomePage: React.FC = () => {
             <div>
               <h4 className="home-page-titles">Mäng käib</h4>
               <IonInput
+                label="Sisesta nr"
+                labelPlacement="floating"
+                fill="outline"
                 className="game-input"
                 type="number"
                 value={winnings}
@@ -256,6 +259,9 @@ const HomePage: React.FC = () => {
             <div>
               <h4 className="home-page-titles">Mäng käib</h4>
               <IonInput
+                label="Sisesta nr"
+                labelPlacement="floating"
+                fill="outline"
                 className="game-input"
                 type="number"
                 value={winnings}
@@ -271,6 +277,9 @@ const HomePage: React.FC = () => {
             <div>
               <h4 className="home-page-titles">Mäng käib</h4>
               <IonInput
+                label="Sisesta nr"
+                labelPlacement="floating"
+                fill="outline"
                 className="game-input"
                 type="number"
                 value={winnings}
@@ -293,6 +302,9 @@ const HomePage: React.FC = () => {
             <div>
               <h4 className="home-page-titles">Mäng käib</h4>
               <IonInput
+                label="Sisesta nr"
+                labelPlacement="floating"
+                fill="outline"
                 className="game-input"
                 type="number"
                 value={winnings}
@@ -315,6 +327,9 @@ const HomePage: React.FC = () => {
             <div>
               <h4 className="home-page-titles">Mäng käib</h4>
               <IonInput
+                label="Sisesta nr"
+                labelPlacement="floating"
+                fill="outline"
                 className="game-input"
                 type="number"
                 value={winnings}

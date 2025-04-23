@@ -229,7 +229,14 @@ function FourteenOne() {
 
   const removeBall = () => {
     saveHistory();
-    setStartingTable(startingTable - 1);
+
+    if (startingTable === 2) {
+      setStartingTable(15);
+    }
+    else{
+      setStartingTable(startingTable - 1);
+    }
+    
   };
 
   const navigateToScore = () => {

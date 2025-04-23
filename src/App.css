@@ -1,8 +1,24 @@
 
+
 :root {
     --ion-font-family: "Arial", sans-serif;
-    --ion-background-color: linear-gradient(to bottom, rgb(158, 223, 73), rgb(102, 204, 102));
+    --ion-background-color: linear-gradient(to bottom, rgb(158, 223, 73), rgb(102, 204, 102))!important;
 }
+
+ion-card, 
+ion-card-header, 
+ion-card-content,
+ion-select,
+ion-select-option {
+  --ion-background-color: linear-gradient(to bottom, rgb(158, 223, 73), rgb(102, 204, 102)) !important;
+  background: linear-gradient(to bottom, rgb(158, 223, 73), rgb(102, 204, 102)) !important;
+  color: black !important;
+}
+
+.alert-radio-label {
+  color: black !important;
+}
+
 
 .nunito {
   font-family: "Nunito", sans-serif;
@@ -11,7 +27,7 @@
 }
 
 ion-tab-bar {
-  --ion-background-color: rgb(158, 223, 73);
+  --ion-background-color: rgb(158, 223, 73)!important;
 }
 
 
@@ -122,6 +138,7 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     font-size: 10px; 
+    color:black !important;
   }
   
 
@@ -301,5 +318,9 @@ table {
 }
 
 
-
-
+@media (prefers-color-scheme: dark) {
+  body, html, ion-app, ion-page, ion-content {
+    background: linear-gradient(to bottom, rgb(158, 223, 73), rgb(102, 204, 102)) !important;
+    color: black !important;
+  }
+}

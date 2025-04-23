@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.sinuette.skooridapp;
 
 import com.getcapacitor.BridgeActivity;
 
