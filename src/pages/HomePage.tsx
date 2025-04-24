@@ -57,7 +57,22 @@ const HomePage: React.FC = () => {
     setActiveButton("14-1");
   };
 
+  const navigateToFourteenOne = () => {
+    if (!winnings || Number(winnings) <= 0) {
+      alert("Palun sisesta suurem arv kui 0");
+      return;
+    }
+    localStorage.setItem("starter", starter);
+    localStorage.setItem("opponent", opponent);
+    localStorage.setItem("winnings", winnings);
+    history.push("/fourteen-one");
+  };
+
   const navigateToEight = () => {
+    if (!winnings || Number(winnings) <= 0) {
+      alert("Palun sisesta suurem arv kui 0");
+      return;
+    }
     localStorage.setItem("starter", starter);
     localStorage.setItem("opponent", opponent);
     localStorage.setItem("winnings", winnings);
@@ -75,6 +90,10 @@ const HomePage: React.FC = () => {
   };
 
   const navigateToNine = () => {
+    if (!winnings || Number(winnings) <= 0) {
+      alert("Palun sisesta suurem arv kui 0");
+      return;
+    }
     localStorage.setItem("starter", starter);
     localStorage.setItem("opponent", opponent);
     localStorage.setItem("winnings", winnings);
@@ -92,6 +111,10 @@ const HomePage: React.FC = () => {
   };
 
   const navigateToTen = () => {
+    if (!winnings || Number(winnings) <= 0) {
+      alert("Palun sisesta suurem arv kui 0");
+      return;
+    }
     localStorage.setItem("starter", starter);
     localStorage.setItem("opponent", opponent);
     localStorage.setItem("winnings", winnings);
@@ -109,6 +132,10 @@ const HomePage: React.FC = () => {
   };
 
   const navigateToSnooker = () => {
+    if (!winnings || Number(winnings) <= 0) {
+      alert("Palun sisesta suurem arv kui 0");
+      return;
+    }
     localStorage.setItem("starter", starter);
     localStorage.setItem("opponent", opponent);
     localStorage.setItem("winnings", winnings);
@@ -123,13 +150,6 @@ const HomePage: React.FC = () => {
     setTenBall(false);
     setSnooker(true);
     setActiveButton("Snuuker");
-  };
-
-  const navigateToFourteenOne = () => {
-    localStorage.setItem("starter", starter);
-    localStorage.setItem("opponent", opponent);
-    localStorage.setItem("winnings", winnings);
-    history.push("/fourteen-one");
   };
 
   const handleCheckboxChange = (e: CustomEvent) => {

@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'skoorid-app2',
+  appId: 'com.sinuette.skooridapp',
+  appName: 'Saaremaa Piljard: Skoorid',
   webDir: 'dist',
   plugins: {
     Keyboard: {

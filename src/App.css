@@ -8,10 +8,13 @@
 ion-card, 
 ion-card-header, 
 ion-card-content,
-ion-select,
 ion-select-option {
   --ion-background-color: linear-gradient(to bottom, rgb(158, 223, 73), rgb(102, 204, 102)) !important;
   background: linear-gradient(to bottom, rgb(158, 223, 73), rgb(102, 204, 102)) !important;
+  color: black !important;
+}
+
+ion-select{
   color: black !important;
 }
 
