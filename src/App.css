@@ -110,7 +110,8 @@ ion-checkbox{
   display: block;          
     margin: 0 auto;           
     width: 30%; 
-    padding: 10px
+    padding: 10px;
+    border: 1px solid white; 
 }
 
 /* .game-input:focus{
